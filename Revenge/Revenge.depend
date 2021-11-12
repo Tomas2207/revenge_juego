@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1636603414 source:c:\users\tomas\desktop\programación\utn\lab\revenge\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"rlutil.h"
+	"funciones.h"
+
+1636512427 c:\users\tomas\desktop\programación\utn\lab\revenge\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1636603437 source:c:\users\tomas\desktop\programación\utn\lab\revenge\funciones.cpp
+	<iostream>
+	<cstdlib>
+
+1636599815 c:\users\tomas\desktop\programación\utn\lab\revenge\funciones.h
+
