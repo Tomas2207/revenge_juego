@@ -9,9 +9,10 @@ using namespace std;
 int main() {
 
     srand(time(NULL));
-    int J1 = 6, J2 = 6, Compartidos = 2, Numero_Objetivo = 0, seleccionar, suma = 0, DadosResta = 0;
+    int J1 = 6, J2 = 6, Compartidos = 2, Numero_Objetivo = 0, seleccionar, suma = 0, DadosResta = 0, ganador;
     int vDados1[J1], vDados2[J2], vDados12[2];
     bool otra = false, J = false;
+
     cout << "Para empezar la partida se tiran los dados" << endl;
     do{                                                             ///primera ronda para ver quien empieza.
         otra = false;
@@ -63,7 +64,7 @@ int main() {
 
         RandomDados(vDados1, J1);
         MostrarDados(vDados1,J1);
-        cout<< "Que dados desea seleccionar? (Para finalizar seleccion ----->0)\nDado: ";
+        cout<< "Que dados desea seleccionar? (Para finalizar seleccion -----> 0)\nDado: ";
 
         cin>>seleccionar;
         while(seleccionar!=0){
@@ -96,10 +97,14 @@ int main() {
             DadosResta = 0;
             cout << suma << endl;
         }
-        if(J1==0 || J2 ==0){
+        if(J1==0){
+            ganador = act;
             break;
         }
-
+        else if(J2 ==0){
+            ganador = act2;
+            break;
+        }
         rlutil::anykey();
         rlutil::cls();
         cout << "----JUGADOR " << act2 << "----" << endl;
@@ -150,12 +155,18 @@ int main() {
             DadosResta = 0;
             cout << suma << endl;
         }
-        if(J1==0 || J2 ==0){
+        if(J1==0){
+            ganador = act;
+            break;
+        }
+        else if(J2 ==0){
+            ganador = act2;
             break;
         }
         rlutil::anykey();
         rlutil::cls();
     }
-    cout << "Gana el jugador..." << endl;
+    rlutil::cls();
+    cout << "GANA EL JUGADOR " << ganador << "!!" <<endl;
     return 0;
 }
