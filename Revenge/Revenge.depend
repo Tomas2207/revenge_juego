@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1636603414 source:c:\users\tomas\desktop\programación\utn\lab\revenge\main.cpp
+1637123789 source:c:\users\tomas\desktop\programación\utn\lab\revenge\main.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>
@@ -20,9 +20,9 @@
 	<sys/types.h>
 	<sys/time.h>
 
-1636603437 source:c:\users\tomas\desktop\programación\utn\lab\revenge\funciones.cpp
+1637117992 source:c:\users\tomas\desktop\programación\utn\lab\revenge\funciones.cpp
 	<iostream>
 	<cstdlib>
 
-1636599815 c:\users\tomas\desktop\programación\utn\lab\revenge\funciones.h
+1637117992 c:\users\tomas\desktop\programación\utn\lab\revenge\funciones.h
 

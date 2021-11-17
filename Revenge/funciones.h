@@ -7,4 +7,6 @@ void MostrarDados (int v[],int cant);
 
 void RandomDados12(int v[], int cant);
 
+int Jugador_Actual (bool J1);
+
 #endif // FUNCIONES_H_INCLUDED

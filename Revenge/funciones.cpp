@@ -19,3 +19,16 @@ void MostrarDados (int v[],int cant){ //muestra los dados que se formaron.
         cout << "DADO " << i+1 << "----> "<<v[i] << endl;
     }
 }
+
+int Jugador_Actual (bool J1){
+    int num;
+    if(J1 == true){
+        num = 1;
+        J1 = false;
+    }
+    else {
+        num = 2;
+        J1 = true;
+    }
+    return num;
+}
