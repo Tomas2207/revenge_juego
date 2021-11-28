@@ -1,172 +1,137 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include "rlutil.h"
+#include <iostream>
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
 #include "funciones.h"
+#include <ctime>
 using namespace std;
 
 
-int main() {
 
-    srand(time(NULL));
-    int J1 = 6, J2 = 6, Compartidos = 2, Numero_Objetivo = 0, seleccionar, suma = 0, DadosResta = 0, ganador;
-    int vDados1[J1], vDados2[J2], vDados12[2];
-    bool otra = false, J = false;
+int main()
+{
+   int opcion,juego, est, stats[10]={0}, a=0;
+   char salir;
+   bool incorrecto = true;
 
-    cout << "Para empezar la partida se tiran los dados" << endl;
-    do{                                                             ///primera ronda para ver quien empieza.
-        otra = false;
-        cout << "Jugador 1" << endl;
-        RandomDados(vDados1, 1);
-        MostrarDados(vDados1, 1);
-        cout << "Jugador 2" << endl;
-        RandomDados(vDados2, 1);
-        MostrarDados(vDados2, 1);
-        if(vDados1[0] > vDados2[0]){
-            cout << "Comienza el JUGADOR 1"<< endl;
-            J = true;
-        }
-        else if (vDados1[0] == vDados2[0]){
-            otra = true;
-            cout << "EMPATE" << endl;
-        }
-        else{
-            cout << "Comienza el JUGADOR 2" << endl;
-        }
-        rlutil::anykey();
-        rlutil::cls();
-    }while(otra == true);
+   string nombre, n[10];
+   for(int e = 0; e<10;e++){
+    n[e] = "VACIO";
+   }
 
-    cout << "-------Comienza la partida---------" << endl;
 
-    while(J1!=0 || J2 !=0){
+    while(incorrecto == true){
+    incorrecto = false;
+    recuadro(1,1,60,20);
+    recuadro(8,4,46,15);
+    rlutil::locate(23,3);
+    cout << "BIENVENIDOS A REVENGE " << endl;
+    rlutil::locate(11,7);
+    cout<<"1- JUGAR ";
+    rlutil::locate(11,9);
+    cout<<"2- ESTADISTICAS ";
+    rlutil::locate(11,11);
+    cout<<"3- CREDITOS";
+    rlutil::locate(11,13);
+    cout<<"0- SALIR";
+    rlutil::locate(11,15);
+    cout<<"ELIJA UNA OPCION: ";
+    cin>>opcion;
+    rlutil::locate(10,20);
+    system("pause");
+    system("cls");
 
-        int act = Jugador_Actual(J);
-        int act2;
-        if (act == 1){
-            act2 = 2;
-        }
-        else{
-            act2 = 1;
-        }
-        cout << "----JUGADOR " << act << "----" << endl;
-        rlutil::anykey();
+        switch(opcion) {
+            case 1:
+            juego=EmpezarGame();
+            incorrecto = true;
+            rlutil::locate(2,19);
+            cout << "Ingrese nombre para las estadisticas" << endl;
+            rlutil::locate(2,20);
+            cin >> nombre;
+            stats[a] = juego;
+            n[a] = nombre;
+            a+=1;
+            Burbujeo(stats, n);
+            rlutil::anykey();
 
-            ///Empieza el jugador 1
-        RandomDados12(vDados12,Compartidos); /// Se tiran los dados de 12 para saber el numero objetivo
-        MostrarDados(vDados12, Compartidos);
-        Numero_Objetivo = vDados12[0] + vDados12[1];
-        cout << "El numero objetivo es: " << Numero_Objetivo << endl;
-        rlutil::anykey();
-
-        cout << "Tire los dados de 6 caras: " << endl; ///Se tiran los dados de 6 caras del J1.
-        rlutil::anykey();
-
-        RandomDados(vDados1, J1);
-        MostrarDados(vDados1,J1);
-        cout<< "Que dados desea seleccionar? (Para finalizar seleccion -----> 0)\nDado: ";
-
-        cin>>seleccionar;
-        while(seleccionar!=0){
-            while(seleccionar>J1){
-                cout<< "Invalido, seleccione otra vez" << endl;
-                cout<< "Dado: " << endl;
-                cin>> seleccionar;
-            }                                              ///se eligen los dados para descartar.
-            suma += vDados1[seleccionar-1];
-            cout << "Suma hasta ahora: " << suma << endl;
-            DadosResta++;
-            cout << "Dado: ";
-            cin>>seleccionar;
-
-        }
-
-        rlutil::cls();
-        if (suma == Numero_Objetivo){           ///si la suma de igual al objetivo se suman los dados al contrincante.
-            cout << "Tirada exitosa!" << endl;
-            J1 = J1 - DadosResta;
-            J2 += DadosResta;
-            cout<< "Dados del jugador "<< act << " : " <<J1 << "\nDados del jugador "<< act2 << " : " << J2 << endl;
-            suma = 0;
-            DadosResta = 0;
-            cout << suma << endl;
-        }
-        else{
-            cout<<"Tirada no exitosa" << endl;
-            suma = 0;
-            DadosResta = 0;
-            cout << suma << endl;
-        }
-        if(J1==0){
-            ganador = act;
             break;
-        }
-        else if(J2 ==0){
-            ganador = act2;
+
+            case 2:
+            recuadro1(1,1,60,20);
+            rlutil::locate(25,3);
+              cout << "Estadisticas" << endl;
+              for(int z=0; z<10;z++){
+                rlutil::locate(15,z+5);
+                cout<< n[z] << " " <<stats[z] << endl;
+              }
+              rlutil::anykey();
+              incorrecto = true;
             break;
-        }
-        rlutil::anykey();
-        rlutil::cls();
-        cout << "----JUGADOR " << act2 << "----" << endl;
-        rlutil::anykey();
 
-        cout << "Proximo Jugador" << endl; ///Empieza el jugador 2, el resto es una copia.
-        RandomDados12(vDados12,Compartidos);
-        MostrarDados(vDados12, Compartidos);
-        Numero_Objetivo = vDados12[0] + vDados12[1];
-        cout << "El numero objetivo es: " << Numero_Objetivo << endl;
-        rlutil::anykey();
 
-        cout << "Tire los dados de 6 caras: " << endl;
-        rlutil::anykey();
+            case 3:
+              recuadro(1,1,60,20);
+              recuadro(8,4,46,15);
+              rlutil::locate(25,3);
+              cout << "CREDITOS" << endl;;
+              rlutil::locate(17,5);
+              cout << "Equipo: Los Revengers " << endl;
+              rlutil::locate(19,9);
+              cout << "Luka Gallo - 25189" << endl;
+              rlutil::locate(15,10);
+              cout << "Tomas Abraham Legajo - 25687" << endl;
+              rlutil::locate(10,20);
+              system("pause");
+              system("cls");
+              incorrecto=true;
+              break;
 
-        RandomDados(vDados2, J2);
-        MostrarDados(vDados2,J2);
-        cout<< "Que dados desea seleccionar? (Para finalizar seleccion ----->0)\nDado: ";
 
-        cin>>seleccionar;
-        while(seleccionar!=0){
-            while(seleccionar>J2){
-                cout<< "Invalido, seleccione otra vez" << endl;
-                cout<< "Dado: " << endl;
-                cin>> seleccionar;
-            }
-            suma += vDados2[seleccionar-1];
-            cout << "Suma hasta ahora: " << suma << endl;
-            DadosResta++;
-            cout << "Dado: ";
-            cin>>seleccionar;
+            case 0:
+               recuadro(1,1,60,20);
+               recuadro(8,4,46,15);
+               rlutil::locate(25,3);
+               cout << "Opcion de salida";
+               rlutil::locate(18,5);
+               cout << "Realmente desea salir?" << endl;
+               rlutil::locate(18,6);
+               cout << "S/N: ";
+               cin >> salir;
+               if(salir=='s'|| salir=='S'){
+               rlutil::locate(18,10);
+               cout << "Gracias por jugar REVENGE!" << endl;
+               rlutil::locate(1,22);
+               return 0;
 
+              }
+              else if(salir=='n'|| salir=='N'){
+               incorrecto=true;
+              }
+                break;
+
+            default:
+
+                recuadro(1,1,60,20);
+                rlutil::locate(15,10);
+                rlutil::setColor(rlutil::BLACK);
+                cout << "Comando incorrecto!" << endl;
+                rlutil::setColor(rlutil::BLACK);
+                rlutil::locate(10,20);
+                system("pause");
+                system("cls");
+                incorrecto=true;
+                break;
         }
 
-        rlutil::cls();
-        if (suma == Numero_Objetivo){
-            cout << "Tirada exitosa!" << endl;
-            J2 = J2 - DadosResta;
-            J1 += DadosResta;
-            cout<< "Dados del jugador "<< act << " : " <<J1 << "\nDados del jugador "<< act2 << " : " << J2 << endl;
-            suma = 0;
-            DadosResta = 0;
-            cout << suma << endl;
-        }
-        else{
-            cout<<"Tirada no exitosa" << endl;
-            suma = 0;
-            DadosResta = 0;
-            cout << suma << endl;
-        }
-        if(J1==0){
-            ganador = act;
-            break;
-        }
-        else if(J2 ==0){
-            ganador = act2;
-            break;
-        }
-        rlutil::anykey();
-        rlutil::cls();
+
     }
-    rlutil::cls();
-    cout << "GANA EL JUGADOR " << ganador << "!!" <<endl;
+
+
+
+
+
     return 0;
 }
+
